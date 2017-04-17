@@ -1,3 +1,2 @@
 # Navi-Backend
-
-a [Sails](http://sailsjs.org) application
+An AI chat engine
