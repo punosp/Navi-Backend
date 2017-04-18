@@ -1,6 +1,6 @@
 
 module.exports.routes ={
-  'get /api/v1/query/:query' : {
+  'post /api/v1/query' : {
     controller : 'QueryController',
     action : 'query'
   },

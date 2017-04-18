@@ -17,12 +17,10 @@ module.exports = {
 
 function queryAction(req, res) {
 	//return res.handleError("hello");
-	var q = req.param('query');
-	var resolvedQuery = [];
-	 resolvedQuery = q.split("@user@");
-	var data = resolvedQuery[0];
-	var user = resolvedQuery[1];
-	console.log(q);
+
+	var data = req.param("query");
+	var user = req.param("user");
+	//console.log(q);
 	Query
 	.matchTags(data, user)
 	.then(function(result) {
