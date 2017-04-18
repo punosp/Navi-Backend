@@ -65,7 +65,7 @@
 
  function getResult(topics, user) {
    return Q.promise(function (resolve, reject) {
-   var searchTags,value;
+   var searchTags,value,records=[],count=0;
    console.log("getContext");
    Context
    .getContext(topics, user)
@@ -85,6 +85,13 @@
        if(s > max) {
          max = s;
          pos = i;
+         records = [];
+         records.push(value);
+         count=1;
+       }
+       else if(s==max) {
+         records.push(value);
+         count++;
        }
        i++;
     })
@@ -99,6 +106,13 @@
         if(s > max) {
           max = s;
           pos = i;
+          records = [];
+          records.push(value);
+          count=1;
+        }
+        else if(s==max) {
+          records.push(value);
+          count++;
         }
         i++;
      })
@@ -113,8 +127,9 @@
      else {
        var response = {
          match: 'partial',
-         data: result[pos],
-         score: max
+         records: records,
+         score: max,
+         count: count
        }
 
        return resolve(response);
@@ -131,8 +146,9 @@
     else {
       var response = {
         match: 'full',
-        data: result[pos],
-        score: max
+        records: records,
+        score: max,
+        count: count
       }
       console.log("value.hit",value.hit);
       if(value.hit == 'one') {
