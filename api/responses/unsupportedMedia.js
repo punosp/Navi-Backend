@@ -1,15 +1,15 @@
 /* global module */
 'use strict';
 /**
- * 403 (Forbidden) Handler
+ * 415 (Unsupported Media Type) Handler
  *
  * Usage:
- * return res.forbidden();
- * return res.forbidden(message);
+ * return res.unsupportedMedia();
+ * return res.unsupportedMedia(message);
  *
  * e.g.:
  * ```
- * return res.forbidden('Access denied.');
+ * return res.unsupportedMedia('Media type not supported');
  * ```
  */
 
@@ -18,9 +18,9 @@ module.exports = function(message) {
   // Get access to `req`, `res`, & `sails`
   var req = this.req,
     res = this.res,
-    statusCode = 403,
+    statusCode = 415,
     sails = req._sails,
-    defaultMessage = 'Cannot be fulfilled',
+    defaultMessage = 'Media type not supported',
     envelope = {
       status: 'error',
       error: {
@@ -36,12 +36,12 @@ module.exports = function(message) {
     // add message to the envelope
     envelope.error['message'] = message;
     // log to the console
-    sails.log.error('@forbidden - Client Error - ', message);
+    sails.log.error('@unsupportedMedia - Client Error - ', message);
   }
   else {
     // add message to the envelope
     envelope.error['message'] = defaultMessage;
-    sails.log.error('@forbidden - Client Error - No Message');
+    sails.log.error('@unsupportedMedia - Client Error - No Message');
   }
 
   // If the user-agent wants JSON, always respond with JSON
@@ -51,11 +51,11 @@ module.exports = function(message) {
     return res.view('errorResponse', {message: message}, function (err, html) {
       if (err) {
         if (err.code === 'E_VIEW_FAILED') {
-          sails.log.error('@forbidden :: Could not locate view for error page');
+          sails.log.error('@unsupportedMedia :: Could not locate view for error page');
         }
         // Otherwise, if this was a more serious error, log to the console with the details.
         else {
-          sails.log.error('@forbidden :: When attempting to render error page view, an error occured (sending JSON instead).  Details: ', err);
+          sails.log.error('@unsupportedMedia :: When attempting to render error page view, an error occured (sending JSON instead).  Details: ', err);
         }
         return res.jsonx(envelope);
       }
