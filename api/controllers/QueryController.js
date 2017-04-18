@@ -19,7 +19,9 @@ function queryAction(req, res) {
 	//return res.handleError("hello");
 
 	var data = req.param("query");
+	console.log(data);
 	var user = req.param("user");
+	console.log(user);
 	//console.log(q);
 	Query
 	.matchTags(data, user)
