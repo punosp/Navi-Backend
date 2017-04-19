@@ -39,7 +39,7 @@ function matchTags(data, user) {
     var noun = [], topic = [], topics = [],temp;
     var raw = nlp(data);
     var slang = raw.match('how are you').found;
-    var info = raw.match('about your self').found;
+    var info = raw.match('about yourself').found;
     var lang = raw.match('programming language').found;
     var dbs = raw.match('database').found;
 
