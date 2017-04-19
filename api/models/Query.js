@@ -34,9 +34,52 @@ module.exports = {
 
 function matchTags(data, user) {
   return Q.promise(function (resolve, reject) {
+
     console.log("hello");
     var noun = [], topic = [], topics = [],temp;
     var raw = nlp(data);
+    var slang = raw.match('how are you').found;
+    var info = raw.match('about your self').found;
+    var lang = raw.match('programming language').found;
+    var dbs = raw.match('database').found;
+
+    if(slang) {
+      var res = {
+        code: 11,
+        data: "I am awesome"
+      }
+      return resolve(res);
+    }
+    if(info) {
+      var res = {
+        code: 11,
+        data: "I am an intelligent AI made by Ashutosh Sonu. I can understand human language"+
+        "and also respond in the same. I am built in Node.js programming language over sails js frame work."+
+        "Currently I am unable to procees quantity actions and emotions. I am here to make your life eaiser."
+      }
+      return resolve(res);
+    }
+    if(lang) {
+      var res = {
+        code: 11,
+        data: "I am built in Node.js programming language over sails js frame work."
+      }
+      return resolve(res);
+    }
+    if(dbs) {
+      var res = {
+        code: 11,
+        data: "I am currently using MongoDB database."
+      }
+      return resolve(res);
+    }
+    if(dbs) {
+      var res = {
+        code: 11,
+        data: "I am currently deployed on amazon aws cloud."
+      }
+      return resolve(res);
+    }
      noun = nlp(data).nouns().toSingular().out('array');
      console.log(noun);
      topic = raw.topics().not('#Possessive').out('array');
