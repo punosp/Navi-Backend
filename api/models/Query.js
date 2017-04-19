@@ -53,9 +53,9 @@ function matchTags(data, user) {
     if(info) {
       var res = {
         code: 11,
-        data: "I am an intelligent AI made by Ashutosh Sonu. I can understand human language"+
+        data: "I am an intelligent AI made by Ashutosh Sonu, Abhijeet Saxena, Shalabh Mangal and Marghub Akhtar. I can understand human language "+
         "and also respond in the same. I am built in Node.js programming language over sails js frame work."+
-        "Currently I am unable to procees quantity actions and emotions. I am here to make your life eaiser."
+        "Currently I am unable to procees quantity actions and emotions. I am here to make your life easier."
       }
       return resolve(res);
     }
